@@ -19,11 +19,11 @@ To run this demo locally, you'll need [git](https://git-scm.com/), [maven](https
 
 1. Fork, then clone this repository.
 
-1. Copy `src/test/webapp/WEB-INF/web.properties.sample` to  `src/test/webapp/WEB-INF/web.properties`
+1. Copy [web.properties.sample](web.properties.sample) to  `src/test/webapp/WEB-INF/web.properties`
 
 1. Edit `web.properties` and enter your [HelloSign API key](https://www.hellosign.com/home/myAccount#api), API app client ID, and client secret (if you enabled OAuth).
 
-1. Start the Jetty container using the maven command:
+1. Start a Jetty container using the maven command:
 
     ```
     mvn -Dorg.slf4j.simpleLogger.defaultLogLevel=debug jetty:run
