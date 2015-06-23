@@ -1,0 +1,9 @@
+.DS_Store
+.metadata
+target
+test.properties
+web.properties
+.settings
+.project
+.classpath
+src/test/webapp/WEB-INF/web.properties
