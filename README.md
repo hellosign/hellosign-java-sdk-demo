@@ -19,7 +19,7 @@ To run this demo locally, you'll need [git](https://git-scm.com/), [maven](https
 
 1. Fork, then clone this repository.
 
-1. Copy [web.properties.sample](web.properties.sample) to  `src/test/webapp/WEB-INF/web.properties`
+1. Copy [web.properties.sample](src/test/webapp/WEB-INF/web.properties.sample) to  `src/test/webapp/WEB-INF/web.properties`
 
 1. Edit `web.properties` and enter your [HelloSign API key](https://www.hellosign.com/home/myAccount#api), API app client ID, and client secret (if you enabled OAuth).
 
@@ -34,7 +34,7 @@ To run this demo locally, you'll need [git](https://git-scm.com/), [maven](https
 1. Go wild!
 
 ## Handling callback events
-Take a look at  [ExampleCallbackServlet.java](ExampleCallbackServlet.java) to see an example of handling callback events in Java. This servlet will be initialized when jetty starts and is configured in [web.xml](web.xml).
+Take a look at  [ExampleCallbackServlet.java](src/test/java/com/hellosign/sdk/callback/ExampleCallbackServlet.java) to see an example of handling callback events in Java. This servlet will be initialized when jetty starts and is configured in [web.xml](src/test/webapp/WEB-INF/web.xml).
 
 # License
 ```
