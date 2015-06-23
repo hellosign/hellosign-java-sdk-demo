@@ -34,7 +34,7 @@ To run this demo locally, you'll need [git](https://git-scm.com/), [maven](https
 1. Go wild!
 
 ## Handling callback events
-Take a look at the class `ExampleCallbackServlet` to see an example of handling callback events in Java. This servlet will be initialized when jetty starts and is configured in the file `src/test/webapp/WEB-INF/web.xml`.
+Take a look at  [ExampleCallbackServlet.java](ExampleCallbackServlet.java) to see an example of handling callback events in Java. This servlet will be initialized when jetty starts and is configured in [web.xml](web.xml).
 
 # License
 ```
