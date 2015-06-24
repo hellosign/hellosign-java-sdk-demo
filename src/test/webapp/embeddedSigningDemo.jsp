@@ -46,7 +46,6 @@
             sigReq.addFile(new File(application.getRealPath("/docs/nda.pdf")));
             sigReq.setTitle("Embedded NDA");
             sigReq.addSigner(myEmail, myName);
-            sigReq.addCC("chris@hellosign.com");
             sigReq.setTestMode(true);
 
             /// Turn it into an embedded request

@@ -9,7 +9,7 @@ String clientId = properties.getProperty("client.id");
 String myName = properties.getProperty("my.name");
 String myEmail = properties.getProperty("my.email");
 String signUrl = "";
-String errorMessage = "";
+String errorMessage = "d";
 
 //Get the user's templates to populate the form
 TemplateList templateList = null;
@@ -82,6 +82,7 @@ if (ServletFileUpload.isMultipartContent(request)) {
             TemplateSignatureRequest sigReq = new TemplateSignatureRequest();
             // sigReq.setTestMode(true);
             System.out.println("Using templateId: " + templateId);
+            sigReq.setTestMode(true);
             sigReq.setTemplateId(templateId);
             for (String role : signersList.keySet()) {
             	Signer s = signersList.get(role);
@@ -174,7 +175,7 @@ if (ServletFileUpload.isMultipartContent(request)) {
             url: "<%= signUrl %>",
             debug: true,
             allowCancel: true,
-            skipDomainVerification: true,
+            // skipDomainVerification: true,
             messageListener: function(eventData) {
                 console.log("Event received: " + eventData);
                 var msg;

@@ -189,7 +189,7 @@
                url: "<%= editUrl %>",
                debug: true,
                allowCancel: true,
-               skipDomainVerification: true,
+              //  skipDomainVerification: true,
                messageListener: function(eventData) {
                    console.log("Event received:");
                     console.log(eventData);

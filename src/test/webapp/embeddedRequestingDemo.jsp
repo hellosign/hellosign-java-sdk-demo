@@ -106,19 +106,18 @@
                     Signer s = signers.get(key);
                     sigReq.addSigner(s.getEmail(), s.getNameOrRole());
                 }
-            }
+              }
               for (File file : files) {
                   sigReq.addFile(file);
               }
 
               // Create an unclaimed draft from the request
-        UnclaimedDraft draft = new UnclaimedDraft(sigReq, UnclaimedDraftType.request_signature);
-        draft.setIsForEmbeddedSigning(false);
-				draft.setUsePreexistingFields(true);
-        draft.setRequesterEmail(myEmail);
+              UnclaimedDraft draft = new UnclaimedDraft(sigReq, UnclaimedDraftType.request_signature);
+              draft.setIsForEmbeddedSigning(false);
+              draft.setRequesterEmail(myEmail);
 
-                // Make this an embedded unclaimed draft
-                EmbeddedRequest embed = new EmbeddedRequest(clientId, draft);
+              // Make this an embedded unclaimed draft
+              EmbeddedRequest embed = new EmbeddedRequest(clientId, draft);
 
               // Send it to HelloSign
               HelloSignClient client = new HelloSignClient(apiKey);
@@ -190,7 +189,7 @@
                 url: "<%= requestUrl %>",
                 debug: true,
                 allowCancel: true,
-                skipDomainVerification: true,
+                // skipDomainVerification: true,
                 messageListener: function(eventData) {
                     console.log("Event received:");
                     console.log(eventData);

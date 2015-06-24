@@ -86,7 +86,7 @@ if (ServletFileUpload.isMultipartContent(request)) {
 
             // First, create a templated request
             TemplateSignatureRequest sigReq = new TemplateSignatureRequest();
-            // sigReq.setTestMode(true);
+            sigReq.setTestMode(true);
             System.out.println("Using templateId: " + templateId);
             sigReq.setTemplateId(templateId);
             for (String role : signersList.keySet()) {
@@ -188,7 +188,7 @@ if (templateList != null) {
                 url: "<%=claimUrl%>",
                 debug : true,
                 allowCancel : true,
-                skipDomainVerification : true,
+                // skipDomainVerification : true,
                 messageListener : function(eventData) {
                     console.log("Event received: " + eventData);
                     var msg;

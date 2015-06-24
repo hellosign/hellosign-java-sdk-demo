@@ -18,7 +18,7 @@
     <dependency>
       <groupId>com.hellosign</groupId>
       <artifactId>hellosign-java-sdk</artifactId>
-      <version>3.1.5</version>
+      <version>3.1.6</version>
       <classifier>jar-with-dependencies</classifier>
 			<scope>test</scope>
     </dependency>
