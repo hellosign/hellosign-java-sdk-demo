@@ -11,6 +11,12 @@
     String signUrl = null;
     String errorMessage = null;
     String hideButton = "false";
+    List<File> files = new ArrayList<File>();
+    List<String> signerRoles = new ArrayList<String>();
+    List<String> ccRoles = new ArrayList<String>();
+    String subject = null;
+    String message = null;
+    boolean isOrdered = false;
 
     if (ServletFileUpload.isMultipartContent(request)) {
         String myName = null;

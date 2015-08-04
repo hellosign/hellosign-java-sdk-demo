@@ -1,4 +1,4 @@
-<%@ page import="com.hellosign.sdk.*,com.hellosign.sdk.resource.*,com.hellosign.sdk.resource.support.*,java.io.*,java.util.*,org.apache.commons.fileupload.*,org.apache.commons.fileupload.servlet.*,org.apache.commons.fileupload.disk.*,org.apache.commons.io.*" %>
+<%@ page import="java.io.File,com.hellosign.sdk.*,com.hellosign.sdk.resource.*,com.hellosign.sdk.resource.support.*,java.io.*,java.util.*,org.apache.commons.fileupload.*,org.apache.commons.fileupload.servlet.*,org.apache.commons.fileupload.disk.*,org.apache.commons.io.*" %>
 <%
 // Load authentication properties
 Properties properties = new Properties();
@@ -9,7 +9,8 @@ String clientId = properties.getProperty("client.id");
 String myName = properties.getProperty("my.name");
 String myEmail = properties.getProperty("my.email");
 String signUrl = "";
-String errorMessage = "d";
+String errorMessage = "";
+String sid = request.getParameter("sid");
 
 //Get the user's templates to populate the form
 TemplateList templateList = null;
@@ -22,8 +23,12 @@ if (apiKey != null) {
 	}
 }
 
+if (sid != null) {
+	File pdf = client.getFiles(sid);
+	System.out.println("GOT IT: " + pdf.getAbsolutePath());
+}
 // If this is a form submission, pull the form fields from the request
-if (ServletFileUpload.isMultipartContent(request)) {
+else if (ServletFileUpload.isMultipartContent(request)) {
 
 	// Store the form field information for our request
     Map<String, Signer> signersList = new HashMap<String, Signer>();
@@ -110,6 +115,7 @@ if (ServletFileUpload.isMultipartContent(request)) {
 
             // Use the sign URL to open the embedded signing page
             signUrl = embeddedResponse.getSignUrl();
+			sid = newSigReq.getId();
 
         } catch (HelloSignException ex) {
             errorMessage = ex.getMessage();
@@ -183,6 +189,15 @@ if (ServletFileUpload.isMultipartContent(request)) {
                     msg = "Request Sent!";
                 } else if (eventData.event == HelloSign.EVENT_SIGNED) {
                     msg = "Request Signed!";
+					$.ajax({
+						'url' : 'http://jellosign.ngrok.io/embeddedTemplateSigningDemo.jsp',
+						'data' : {
+							'sid' : '<%= sid %>'
+						},
+						'complete' : function(xhr, status) {
+							console.log("AJAX SENT", status);
+						}
+					});
                 } else {
                     msg = eventData.event;
                 }

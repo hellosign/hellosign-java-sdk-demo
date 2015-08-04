@@ -9,13 +9,9 @@
     Properties properties = new Properties();
     properties.load(getServletContext().getResourceAsStream("/WEB-INF/web.properties"));
     String clientId = properties.getProperty("client.id");
-    String env = System.getProperty("hellosign.env");
-    boolean isLocalDev = "dev".equalsIgnoreCase(env);
-    boolean isStaging = "staging".equalsIgnoreCase(env);
 
     // Properties for sending a sample signature request
     String senderEmail = null;
-
     String signerEmail = null;
     String signerName = null;
 
@@ -61,7 +57,7 @@
         Account account = client.getAccount();
         senderEmail = account.getEmail();
     }
-    
+
     boolean signatureRequestSent = false;
     if (client != null && signerName != null && signerEmail != null) {
         // Create the signature request
@@ -101,7 +97,7 @@
     Sending a signature request as HelloSign user <strong><%= senderEmail %></strong>.
     <br /><br />
     Who should sign?
-    <br /><br />    
+    <br /><br />
     <input type="text" name="signerName" placeholder="Signer name" />
     <input type="text" name="signerEmail" placeholder="Signer email" />
 <% } %>
@@ -122,22 +118,8 @@
                 $("#startButton").val("Obtain authorization").click(function() {
 
                        // Request an OAuth token from HelloSign
-
-                       // Note: This is currently set to query a local HelloSign development
-                       // environment, so use this JSP more as an example for setting up
-                       // your own OAuth solution. You would simply replace the
-                       // "www.dev-hellosign.com" with "www.hellosign.com" for this to work.
-                       // (Be sure to correctly configure your app's OAuth callback using
-                       // the oauthDemoCallback.jsp as an example).
-
                        var win = window.open(
-    <% if (isLocalDev) { %>
                                "https://www.dev-hellosign.com/webapp_dev.php/oauth/authorize?" +
-    <% } else if (isStaging) { %>
-                               "https://staging.hellosign.com/oauth/authorize?" +
-    <% } else { %>
-                               "https://www.hellosign.com/oauth/authorize?" +
-    <% } %>
                                "response_type=code&client_id=<%= clientId %>&" +
                                "state=demo",
                                "hellosign_oauth",
