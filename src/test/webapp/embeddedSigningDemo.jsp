@@ -53,6 +53,7 @@
             sigReq.setTitle("Embedded NDA");
             sigReq.addSigner(myEmail, myName);
             sigReq.setTestMode(true);
+            sigReq.setUxVersion(AbstractRequest.UX_VERSION_2);
 
             /// Turn it into an embedded request
             EmbeddedRequest embedded = new EmbeddedRequest(clientId, sigReq);
@@ -88,7 +89,14 @@
 <% if (signUrl == null) { %>
     <input type="text" name="yourName" placeholder="Your Name" />
     <input type="text" name="yourEmail" placeholder="Your Email" />
-    <input type="checkbox" name="embedded" /><label for="embedded">Is embedded?</label>
+    <br /><br />
+    <input type="checkbox" name="embedded" />&nbsp;<label for="embedded">Embed in page</label>
+    <br /><br />
+    <label for="ux_version">UX Version</label>
+    <select name="ux_version">
+        <option value="1" selected>Default</option>
+        <option value="2">Responsive</option>
+    </select>
 <jsp:include page="/common-jsp/footer.jsp" />
 <% } else { %>
 <jsp:include page="/common-jsp/footer.jsp">
@@ -105,6 +113,8 @@
             HelloSign.open({
                 url: "<%= signUrl %>",
                 debug: true,
+                skipDomainVerification: true,
+                uxVersion: 2,
                 // container: document.getElementById("hello-container"),
                 messageListener: function(eventData) {
                     console.log("Event received:");

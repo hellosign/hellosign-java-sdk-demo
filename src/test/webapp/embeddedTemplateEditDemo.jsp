@@ -83,6 +83,19 @@ if (ServletFileUpload.isMultipartContent(request)) {
                 editUrl = resp.getEditUrl();
             }
 
+            /* 
+            // The following is used to test the template file download
+            File f = client.getTemplateFile(templateId);
+            FileInputStream fis = new FileInputStream(f);
+            response.setContentType("APPLICATION/OCTET-STREAM");   
+            response.setHeader("Content-Disposition","attachment; filename=\"" + f.getName() + "\"");   
+                      
+            int i;   
+            while ((i=fis.read()) != -1) {  
+              out.write(i);   
+            }   
+            fis.close();
+            */
         } catch (HelloSignException ex) {
         	errorMessage = ex.getMessage();
             ex.printStackTrace();
