@@ -1,7 +1,7 @@
 <%
-  String env = System.getProperty("hellosign.env");
-  boolean isLocalDev = "dev".equalsIgnoreCase(env);
-  boolean isStaging = "staging".equalsIgnoreCase(env);
+  String baseUrl = System.getProperty("hellosign.base.url");
+  boolean isLocalDev = baseUrl != null && baseUrl.contains("dev-hellosign.com");
+  boolean isStaging = baseUrl != null && baseUrl.contains("staging-hellosign.com");
 %>
 <%
 if (request.getParameter("hideButton") == null) {
@@ -29,11 +29,6 @@ if (request.getParameter("hideButton") == null) {
     %>
     <script type="text/javascript"
         src="https://cdn.dev-hellosign.com/js/embedded.js"></script>
-    <%
-        } else if (isStaging) {
-    %>
-    <script type="text/javascript"
-        src="//staging.hellosign.com/js/embedded.js"></script>
     <%
         } else {
     %>

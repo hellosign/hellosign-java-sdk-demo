@@ -113,7 +113,7 @@
 
               // Create an unclaimed draft from the request
               UnclaimedDraft draft = new UnclaimedDraft(sigReq, UnclaimedDraftType.request_signature);
-              draft.setIsForEmbeddedSigning(false);
+              draft.setIsForEmbeddedSigning(true);
               draft.setRequesterEmail(myEmail);
 
               // Make this an embedded unclaimed draft

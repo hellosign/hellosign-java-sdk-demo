@@ -78,12 +78,13 @@ if (ServletFileUpload.isMultipartContent(request)) {
 
         try {
 
+            /*
             EmbeddedResponse resp = client.getEmbeddedTemplateEditUrl(templateId);
             if (resp != null) {
                 editUrl = resp.getEditUrl();
             }
+            */
 
-            /* 
             // The following is used to test the template file download
             File f = client.getTemplateFile(templateId);
             FileInputStream fis = new FileInputStream(f);
@@ -95,7 +96,6 @@ if (ServletFileUpload.isMultipartContent(request)) {
               out.write(i);   
             }   
             fis.close();
-            */
         } catch (HelloSignException ex) {
         	errorMessage = ex.getMessage();
             ex.printStackTrace();

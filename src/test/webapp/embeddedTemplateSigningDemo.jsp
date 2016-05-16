@@ -11,6 +11,7 @@ String myEmail = properties.getProperty("my.email");
 String signUrl = "";
 String errorMessage = "";
 String sid = request.getParameter("sid");
+String nextSig = request.getParameter("nextSig");
 
 //Get the user's templates to populate the form
 TemplateList templateList = null;
@@ -26,6 +27,19 @@ if (apiKey != null) {
 if (sid != null) {
 	File pdf = client.getFiles(sid);
 	System.out.println("GOT IT: " + pdf.getAbsolutePath());
+}
+else if (nextSig != null && !"".equals(nextSig)) {
+    try {
+        // Retrieve the embedded signing URL for the signature
+        EmbeddedResponse embeddedResponse = client.getEmbeddedSignUrl(nextSig);
+
+        // Use the sign URL to open the embedded signing page
+        signUrl = embeddedResponse.getSignUrl();
+
+    } catch (HelloSignException ex) {
+        errorMessage = ex.getMessage();
+        ex.printStackTrace();
+    }
 }
 // If this is a form submission, pull the form fields from the request
 else if (ServletFileUpload.isMultipartContent(request)) {
@@ -78,9 +92,8 @@ else if (ServletFileUpload.isMultipartContent(request)) {
         e.printStackTrace();
     }
 
-    // If we have a template ID, let's try to create the embedded request
     if (templateId != null) {
-
+        // If we have a template ID, let's try to create the embedded request
         try {
 
         	// First, create a templated request
@@ -89,6 +102,16 @@ else if (ServletFileUpload.isMultipartContent(request)) {
             System.out.println("Using templateId: " + templateId);
             sigReq.setTestMode(true);
             sigReq.setTemplateId(templateId);
+            CustomField field = new CustomField();
+            field.setName("Test Textbox");
+            field.setValue("Test Name");
+            field.setEditor("Manager");
+            field.setIsRequired(true);
+            sigReq.addCustomField(field);
+            CustomField box = new CustomField();
+            box.setName("Test Checkbox");
+            box.setValue("true");
+            sigReq.addCustomField(box);
             for (String role : signersList.keySet()) {
             	Signer s = signersList.get(role);
             	sigReq.setSigner(role, s.getEmail(), s.getNameOrRole());
@@ -96,9 +119,9 @@ else if (ServletFileUpload.isMultipartContent(request)) {
             for (String role : ccList.keySet()) {
             	sigReq.setCC(role, ccList.get(role));
             }
-            for (String fieldName : customFieldList.keySet()) {
+            /* for (String fieldName : customFieldList.keySet()) {
             	sigReq.setCustomFieldValue(fieldName, customFieldList.get(fieldName));
-            }
+            } */
 
             // Second, create an embedded request with it
             EmbeddedRequest embedded = new EmbeddedRequest(clientId, sigReq);
@@ -108,7 +131,12 @@ else if (ServletFileUpload.isMultipartContent(request)) {
 
             // Retrieve the first Signature ID
             // (for demo purposes we'll just demonstrate embedding the first signature request)
-            Signature sig = newSigReq.getSignatures().get(0);
+            List<Signature> sigs = newSigReq.getSignatures();
+            Signature sig = sigs.get(0);
+            nextSig = null;
+            if (sigs.size() > 1) {
+                nextSig = sigs.get(1).getId();
+            }
 
             // Retrieve the embedded signing URL for the signature
             EmbeddedResponse embeddedResponse = client.getEmbeddedSignUrl(sig.getId());
@@ -181,6 +209,7 @@ else if (ServletFileUpload.isMultipartContent(request)) {
             url: "<%= signUrl %>",
             debug: true,
             allowCancel: true,
+            uxVersion: 1,
             // skipDomainVerification: true,
             messageListener: function(eventData) {
                 console.log("Event received: " + eventData);
@@ -189,6 +218,9 @@ else if (ServletFileUpload.isMultipartContent(request)) {
                     msg = "Request Sent!";
                 } else if (eventData.event == HelloSign.EVENT_SIGNED) {
                     msg = "Request Signed!";
+                    <% if (nextSig != null && !"".equals(nextSig)) { %>
+                    window.location = 'http://jellosign.ngrok.io/embeddedTemplateSigningDemo.jsp?nextSig=<%= nextSig %>';
+                    <% } else { %>
 					$.ajax({
 						'url' : 'http://jellosign.ngrok.io/embeddedTemplateSigningDemo.jsp',
 						'data' : {
@@ -198,6 +230,7 @@ else if (ServletFileUpload.isMultipartContent(request)) {
 							console.log("AJAX SENT", status);
 						}
 					});
+					<% } %>
                 } else {
                     msg = eventData.event;
                 }

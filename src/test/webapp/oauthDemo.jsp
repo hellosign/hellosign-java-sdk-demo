@@ -9,6 +9,10 @@
     Properties properties = new Properties();
     properties.load(getServletContext().getResourceAsStream("/WEB-INF/web.properties"));
     String clientId = properties.getProperty("client.id");
+    String oauthAuthorizeUrl = System.getProperty("hellosign.oauth.authorize.url");
+    if (oauthAuthorizeUrl == null) {
+        oauthAuthorizeUrl = "https://www.hellosign.com/oauth/authorize";
+    }
 
     // Properties for sending a sample signature request
     String senderEmail = null;
@@ -67,6 +71,7 @@
         sigReq.setMessage("Sent via the hellosign-java-sdk demo app.");
         sigReq.addSigner(signerEmail, signerName);
         sigReq.setTestMode(true);
+        sigReq.setUxVersion(2);
 
         // Send it!
         SignatureRequest sigReqResponse = client.sendSignatureRequest(sigReq);
@@ -118,8 +123,9 @@
                 $("#startButton").val("Obtain authorization").click(function() {
 
                        // Request an OAuth token from HelloSign
+                       
                        var win = window.open(
-                               "https://www.dev-hellosign.com/webapp_dev.php/oauth/authorize?" +
+                               "<%= oauthAuthorizeUrl %>?" +
                                "response_type=code&client_id=<%= clientId %>&" +
                                "state=demo",
                                "hellosign_oauth",

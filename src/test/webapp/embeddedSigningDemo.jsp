@@ -1,3 +1,5 @@
+<%@page import="com.hellosign.sdk.resource.support.types.ValidationType"%>
+<%@page import="com.hellosign.sdk.resource.support.types.FieldType"%>
 <%@page import="org.apache.commons.fileupload.servlet.ServletFileUpload"%>
 <%@page import="org.apache.commons.fileupload.disk.DiskFileItemFactory"%>
 <%@page import="org.apache.commons.fileupload.FileItem"%>
@@ -49,11 +51,40 @@
         try {
             // Create the signature request
             SignatureRequest sigReq = new SignatureRequest();
-            sigReq.addFile(new File(application.getRealPath("/docs/nda.pdf")));
+            Document doc = new Document();
+            doc.setFile(new File(application.getRealPath("/docs/nda.pdf")));
+            FormField textField = new FormField();
+            textField.setSigner(1);
+            textField.setApiId("textfield_1");
+            textField.setHeight(25);
+            textField.setWidth(300);
+            textField.setName("Name");
+            textField.setPage(1);
+            textField.setRequired(true);
+            textField.setType(FieldType.text);
+            textField.setValidationType(ValidationType.letters_only);
+            textField.setX(100);
+            textField.setY(100);
+            
+            FormField sigField = new FormField();
+            sigField.setSigner(1);
+            sigField.setApiId("sigfield_1");
+            sigField.setHeight(50);
+            sigField.setWidth(200);
+            sigField.setName("Signature");
+            sigField.setPage(1);
+            sigField.setRequired(true);
+            sigField.setType(FieldType.signature);
+            sigField.setX(350);
+            sigField.setY(720);
+
+            doc.addFormField(textField);
+            doc.addFormField(sigField);
+
+            sigReq.addDocument(doc);
             sigReq.setTitle("Embedded NDA");
             sigReq.addSigner(myEmail, myName);
             sigReq.setTestMode(true);
-            sigReq.setUxVersion(AbstractRequest.UX_VERSION_2);
 
             /// Turn it into an embedded request
             EmbeddedRequest embedded = new EmbeddedRequest(clientId, sigReq);
@@ -97,6 +128,7 @@
         <option value="1" selected>Default</option>
         <option value="2">Responsive</option>
     </select>
+    <div id="hello-container" style="width:600px;"></div>
 <jsp:include page="/common-jsp/footer.jsp" />
 <% } else { %>
 <jsp:include page="/common-jsp/footer.jsp">
@@ -113,8 +145,11 @@
             HelloSign.open({
                 url: "<%= signUrl %>",
                 debug: true,
-                skipDomainVerification: true,
+                // skipDomainVerification: true,
                 uxVersion: 2,
+                /* whiteLabelingOptions: {
+                    'primary_button_color': '#FF0000'
+                }, */
                 // container: document.getElementById("hello-container"),
                 messageListener: function(eventData) {
                     console.log("Event received:");

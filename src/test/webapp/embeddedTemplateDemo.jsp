@@ -1,3 +1,4 @@
+<%@page import="com.hellosign.sdk.resource.support.types.FieldType"%>
 <%@page import="java.io.Serializable"%>
 <%@page import="com.hellosign.sdk.resource.TemplateSignatureRequest"%>
 <%@page import="com.hellosign.sdk.resource.TemplateDraft"%>
@@ -90,6 +91,7 @@
             try {
                 // Create a template draft
                 TemplateDraft draft = new TemplateDraft();
+                draft.setUseTextTags(true);
                 draft.setTestMode(true);
                 draft.setUsePreexistingFields(true);
                 for (File file : files) {
@@ -109,6 +111,8 @@
                 if (!"".equals(message)) {
                     draft.setMessage(message);
                 }
+                draft.addMergeField("Test Textbox", FieldType.text);
+                draft.addMergeField("Test Checkbox", FieldType.checkbox);
                 EmbeddedRequest req = new EmbeddedRequest(clientId, draft);
                 Map<String, Serializable> postFields = req.getPostFields();
                 for (String key : postFields.keySet()) {
