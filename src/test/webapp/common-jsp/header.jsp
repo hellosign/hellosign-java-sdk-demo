@@ -56,6 +56,7 @@
                 <li><a href="/embeddedRequestingDemo.jsp">Requesting</a></li>
                 <li><a href="/embeddedTemplateDemo.jsp">Template Creation</a></li>
                 <li><a href="/embeddedTemplateEditDemo.jsp">Editing a Template</a></li>
+                <li><a href="/embeddedTemplateFileDemo.jsp">Downloading Template Files</a></li>
                 <li><a href="/embeddedTemplateSigningDemo.jsp">Signing with a Template</a></li>
                 <li><a href="/embeddedTemplateRequestingDemo.jsp">Requesting with a Template</a></li>
                 <li><a href="/oauthDemo.jsp">OAuth 2.0 Demo</a></li>

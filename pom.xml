@@ -13,12 +13,13 @@
         <user.name>Chris Paul (chris@hellosign.com)</user.name>
         <jettyVersion>7.6.14.v20131031</jettyVersion>
         <slf4jVersion>1.7.5</slf4jVersion>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     </properties>
     <dependencies>
         <dependency>
             <groupId>com.hellosign</groupId>
             <artifactId>hellosign-java-sdk</artifactId>
-            <version>3.4.0</version>
+            <version>3.6.0-SNAPSHOT</version>
             <classifier>jar-with-dependencies</classifier>
             <scope>test</scope>
         </dependency>
