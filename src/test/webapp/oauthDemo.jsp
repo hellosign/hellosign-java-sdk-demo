@@ -6,9 +6,7 @@
 <%@page import="org.apache.commons.fileupload.FileItem"%>
 <%
     // Load authentication properties
-    Properties properties = new Properties();
-    properties.load(getServletContext().getResourceAsStream("/WEB-INF/web.properties"));
-    String clientId = properties.getProperty("client.id");
+    String clientId = System.getProperty("hellosign.client.id");
     String oauthAuthorizeUrl = System.getProperty("hellosign.oauth.authorize.url");
     if (oauthAuthorizeUrl == null) {
         oauthAuthorizeUrl = "https://www.hellosign.com/oauth/authorize";

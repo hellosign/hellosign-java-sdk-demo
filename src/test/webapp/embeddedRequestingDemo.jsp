@@ -18,10 +18,8 @@
 
 <%
   // Load authentication properties
-  Properties properties = new Properties();
-  properties.load(getServletContext().getResourceAsStream("/WEB-INF/web.properties"));
-  String apiKey = properties.getProperty("hellosign.api.key");
-  String clientId = properties.getProperty("client.id");
+  String apiKey = System.getProperty("hellosign.api.key");
+  String clientId = System.getProperty("hellosign.client.id");
   String requestUrl = "";
   String errorMessage = null;
 

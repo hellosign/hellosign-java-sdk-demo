@@ -26,6 +26,7 @@ package com.hellosign.sdk.callback;
 
 import java.io.IOException;
 import java.text.DateFormat;
+import java.util.Enumeration;
 import java.util.List;
 import java.util.TimeZone;
 
@@ -68,6 +69,11 @@ public class ExampleCallbackServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+        Enumeration<String> names = request.getParameterNames();
+        while (names.hasMoreElements()) {
+            String name = names.nextElement();
+            System.out.println(name + " = " + request.getParameter(name));
+        }
         // First, process the response body and retrieve the JSON object
         // (it lives in the POST field called "json")
         String jsonStr = null;

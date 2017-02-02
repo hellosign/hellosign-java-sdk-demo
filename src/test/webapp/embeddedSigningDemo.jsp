@@ -6,10 +6,8 @@
 <%@ page import="com.hellosign.sdk.*,com.hellosign.sdk.resource.*,com.hellosign.sdk.resource.support.*,java.io.File,java.util.*" %>
 <%
     // Load authentication properties
-    Properties properties = new Properties();
-    properties.load(getServletContext().getResourceAsStream("/WEB-INF/web.properties"));
-    String apiKey = properties.getProperty("hellosign.api.key");
-    String clientId = properties.getProperty("client.id");
+    String apiKey = System.getProperty("hellosign.api.key");
+    String clientId = System.getProperty("hellosign.client.id");
     String signUrl = null;
     String errorMessage = null;
     String hideButton = "false";
@@ -60,7 +58,7 @@
             textField.setWidth(300);
             textField.setName("Name");
             textField.setPage(1);
-            textField.setRequired(true);
+            textField.setIsRequired(true);
             textField.setType(FieldType.text);
             textField.setValidationType(ValidationType.letters_only);
             textField.setX(100);
@@ -73,7 +71,7 @@
             sigField.setWidth(200);
             sigField.setName("Signature");
             sigField.setPage(1);
-            sigField.setRequired(true);
+            sigField.setIsRequired(true);
             sigField.setType(FieldType.signature);
             sigField.setX(350);
             sigField.setY(720);

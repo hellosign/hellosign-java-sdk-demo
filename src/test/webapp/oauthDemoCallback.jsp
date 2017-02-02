@@ -6,11 +6,9 @@
 	String code = request.getParameter("code");
 	if (code != null) {
 		// Load authentication properties
-		Properties properties = new Properties();
-		properties.load(getServletContext().getResourceAsStream("/WEB-INF/web.properties"));
-		String apiKey = properties.getProperty("hellosign.api.key");
-		String clientId = properties.getProperty("client.id");
-		String clientSecret = properties.getProperty("client.secret");
+		String apiKey = System.getProperty("hellosign.api.key");
+		String clientId = System.getProperty("hellosign.client.id");
+		String clientSecret = System.getProperty("hellosign.client.secret");
 
 		try {
 
@@ -18,7 +16,7 @@
 			HelloSignClient client = new HelloSignClient(apiKey);
 
 			// Using the code sent by HelloSign, ask for an access token
-			OauthData data = client.getOauthData(code, clientId, clientSecret);
+			OauthData data = client.getOauthData(code, clientId, clientSecret, "demo", false);
 
 			// Store the token to the user's session
 			session.setAttribute("hellosign_oauth", data);
