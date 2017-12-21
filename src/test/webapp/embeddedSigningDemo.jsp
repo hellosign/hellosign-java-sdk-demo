@@ -52,7 +52,7 @@
             Document doc = new Document();
             doc.setFile(new File(application.getRealPath("/docs/nda.pdf")));
             FormField textField = new FormField();
-            textField.setSigner(1);
+            textField.setSigner(0);
             textField.setApiId("textfield_1");
             textField.setHeight(25);
             textField.setWidth(300);
@@ -65,7 +65,7 @@
             textField.setY(100);
             
             FormField sigField = new FormField();
-            sigField.setSigner(1);
+            sigField.setSigner(0);
             sigField.setApiId("sigfield_1");
             sigField.setHeight(50);
             sigField.setWidth(200);
