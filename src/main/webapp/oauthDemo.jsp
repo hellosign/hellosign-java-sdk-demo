@@ -127,7 +127,7 @@
                                "response_type=code&client_id=<%= clientId %>&" +
                                "state=demo",
                                "hellosign_oauth",
-                               "width=800,height=600");
+                               "width=1200,height=600");
 
                        // Poll window to see if it's closed
                        var pollTimer = setInterval(function() {

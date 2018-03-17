@@ -4,6 +4,11 @@
 <%@page import="java.util.Properties"%>
 <%
 	String code = request.getParameter("code");
+	String state = request.getParameter("state");
+	if (state == null ) {
+	    state = "demo";
+	}
+
 	if (code != null) {
 		// Load authentication properties
 		String apiKey = System.getProperty("hellosign.api.key");
@@ -16,7 +21,7 @@
 			HelloSignClient client = new HelloSignClient(apiKey);
 
 			// Using the code sent by HelloSign, ask for an access token
-			OauthData data = client.getOauthData(code, clientId, clientSecret, "demo", false);
+			OauthData data = client.getOauthData(code, clientId, clientSecret, state, false);
 
 			// Store the token to the user's session
 			session.setAttribute("hellosign_oauth", data);
