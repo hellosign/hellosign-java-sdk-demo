@@ -25,12 +25,7 @@ To run this demo locally, you'll need [git](https://git-scm.com/), [gradle](http
 
 3. Fork, then clone this repository.
 
-4. Set environment variables by creating a gradle.properties file using details from your api app
-
-    hellosign.api.key=
-    hellosign.client.id=
-    hellosign.client.secret=
-    hellosign.oauth.authorize.url=https://app.dev-hellosign.com/oauth/authorize
+4. Set environment variables by creating a gradle.properties based on the included gradle.properties.sample file.
 
 5. Start a Jetty using gradle container using the maven command:
 
