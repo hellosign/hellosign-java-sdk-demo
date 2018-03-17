@@ -1,0 +1,5 @@
+org.apache.commons.logging.Log=org.apache.commons.logging.impl.SimpleLog
+hellosign.api.key=
+hellosign.client.id=
+hellosign.client.secret=
+hellosign.oauth.authorize.url=https://app.dev-hellosign.com/oauth/authorize
