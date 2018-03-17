@@ -2,4 +2,9 @@ org.apache.commons.logging.Log=org.apache.commons.logging.impl.SimpleLog
 hellosign.api.key=
 hellosign.client.id=
 hellosign.client.secret=
-hellosign.oauth.authorize.url=https://app.dev-hellosign.com/oauth/authorize
+hellosign.oauth.authorize.url=https://app.hellosign.com/oauth/authorize
+
+## Optional: Used by Java SDK
+hellosign.oauth.base.url=https://app.hellosign.com/oauth/token
+hellosign.base.url=https://api.hellosign.com/v3"
+hellosign.disable.ssl=true
