@@ -127,3 +127,6 @@ gradle-app.setting
 src/main/webapp/WEB-INF/web.properties
 gradle.properties
 !gradle.properties.sample
+
+.DS_Store
+.settings/
