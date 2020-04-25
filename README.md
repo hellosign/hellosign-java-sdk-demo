@@ -30,7 +30,7 @@ To run this demo locally, you'll need [git](https://git-scm.com/), [gradle](http
 5. Start a Jetty using gradle container using the maven command:
 
     ```
-    gradle appRun
+    ./gradlew appRun
     ```
 
 6. Open a web browser and point it to: `http://<YOUR_NGROK_HOST>.ngrok.io`

@@ -109,8 +109,8 @@
                 if (!"".equals(message)) {
                     draft.setMessage(message);
                 }
-                draft.addMergeField("Test Textbox", FieldType.text);
-                draft.addMergeField("Test Checkbox", FieldType.checkbox);
+                draft.addMergeField("Test Textbox", FieldType.TEXT);
+                draft.addMergeField("Test Checkbox", FieldType.CHECKBOX);
                 EmbeddedRequest req = new EmbeddedRequest(clientId, draft);
                 Map<String, Serializable> postFields = req.getPostFields();
                 for (String key : postFields.keySet()) {

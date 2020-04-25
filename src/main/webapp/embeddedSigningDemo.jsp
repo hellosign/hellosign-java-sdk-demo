@@ -59,7 +59,7 @@
             textField.setName("Name");
             textField.setPage(1);
             textField.setIsRequired(true);
-            textField.setType(FieldType.text);
+            textField.setType(FieldType.TEXT);
             textField.setValidationType(ValidationType.letters_only);
             textField.setX(100);
             textField.setY(100);
@@ -72,7 +72,7 @@
             sigField.setName("Signature");
             sigField.setPage(1);
             sigField.setIsRequired(true);
-            sigField.setType(FieldType.signature);
+            sigField.setType(FieldType.SIGNATURE);
             sigField.setX(350);
             sigField.setY(720);
 
