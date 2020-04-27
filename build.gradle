@@ -23,11 +23,11 @@ repositories {
     flatDir {
         dirs 'libs'
     }
-    maven { url "http://repo.maven.apache.org/maven2" }
+    mavenCentral()
 }
 
 dependencies {
-    compile group: 'com.hellosign', name: 'hellosign-java-sdk', version: '5.0.1', classifier: 'jar-with-dependencies'
+    compile group: 'com.hellosign', name: 'hellosign-java-sdk', version: '5.0.1'
     //compile files('../hellosign-java-sdk/build/libs/hellosign-java-sdk-5.0.1.jar')
     compile group: 'commons-fileupload', name: 'commons-fileupload', version: '1.4'
     compile group: 'javax.servlet', name: 'javax.servlet-api', version: '4.0.1'
